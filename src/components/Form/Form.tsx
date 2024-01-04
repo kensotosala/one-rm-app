@@ -12,12 +12,32 @@ const Form = () => {
     { label: "lb", value: "lb" },
   ]);
 
+  const [weight, setWeight] = useState("");
+  const [reps, setReps] = useState("");
+
+  const handleSumbit = () => {
+    let result = parseInt(weight) * (1 + 0.025 * parseInt(reps));
+    console.log("Weigth: ", result);
+    handleClear();
+  };
+
+  const handleClear = () => {
+    setWeight("");
+    setReps("");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Calculate your 1RM</Text>
       <View style={styles.weightInput}>
         <View style={styles.leftContainer}>
-          <Input ref={null} label="Weight" labelStyle={{ color: "#000" }} />
+          <Input
+            ref={null}
+            label="Weight"
+            labelStyle={{ color: "#000" }}
+            value={weight}
+            onChangeText={setWeight}
+          />
         </View>
         <View style={styles.rightContainer}>
           <DropDownPicker
@@ -33,11 +53,17 @@ const Form = () => {
       </View>
       <View>
         <View>
-          <Input ref={null} label="Reps" labelStyle={{ color: "#000" }} />
+          <Input
+            ref={null}
+            label="Reps"
+            labelStyle={{ color: "#000" }}
+            onChangeText={setReps}
+            value={reps}
+          />
         </View>
       </View>
       <View style={styles.btnContainer}>
-        <TouchableOpacity style={styles.calculateBtn}>
+        <TouchableOpacity style={styles.calculateBtn} onPress={handleSumbit}>
           <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 16 }}>
             Calculate
           </Text>
@@ -56,7 +82,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     marginTop: 10,
-    fontSize: 22,
+    fontSize: 25,
     fontWeight: "bold",
   },
   label: {
@@ -68,10 +94,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   leftContainer: {
-    width: "80%",
+    width: "75%",
   },
   rightContainer: {
-    width: "20%",
+    width: "25%",
   },
   btnContainer: {},
   calculateBtn: {
