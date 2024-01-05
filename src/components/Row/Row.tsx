@@ -1,16 +1,33 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { FC, useEffect, useState } from "react";
+import { reps, percentages } from "../../consts/consts";
 
-const Row = () => {
+const Row: React.FC<{ maxRM: number }> = ({ maxRM }) => {
   return (
     <View style={styles.contentContainer}>
       <View style={styles.leftContainer}>
         <Text style={styles.subtitle}>Reps</Text>
-        <Text style={styles.value}>1</Text>
+        {reps.map((item, index) => (
+          <Text key={index} style={styles.value}>
+            {item}
+          </Text>
+        ))}
+      </View>
+      <View style={styles.centerContainer}>
+        <Text style={styles.subtitle}>Lift Weight</Text>
+        {percentages.map((item, index) => (
+          <Text key={index} style={styles.value}>
+            {item * maxRM}
+          </Text>
+        ))}
       </View>
       <View style={styles.rightContainer}>
         <Text style={styles.subtitle}>Percentage</Text>
-        <Text style={styles.value}>30%</Text>
+        {percentages.map((item, index) => (
+          <Text key={index} style={styles.value}>
+            {(item * 100).toFixed(0)}%
+          </Text>
+        ))}
       </View>
     </View>
   );
@@ -26,6 +43,9 @@ const styles = StyleSheet.create({
   },
   leftContainer: {
     // backgroundColor: "red",
+    flex: 2,
+  },
+  centerContainer: {
     flex: 2,
   },
   rightContainer: {

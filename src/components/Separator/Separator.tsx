@@ -12,9 +12,8 @@ const Separator = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#000",
-    width: "90%",
+    width: "100%",
     height: 1,
-    marginHorizontal: 50,
     marginTop: 30,
   },
 });

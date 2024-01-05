@@ -14,8 +14,6 @@ const App = () => {
         <StatusBar style="light" backgroundColor="#000" />
         <Header />
         <Form />
-        <Separator />
-        <Table />
       </SafeAreaView>
     </ScrollView>
   );

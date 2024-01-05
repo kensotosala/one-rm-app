@@ -2,6 +2,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { Input } from "@rneui/themed";
 import DropDownPicker from "react-native-dropdown-picker";
+import Table from "../Table";
+import Separator from "../Separator";
 
 const Form = () => {
   // Dropdown values
@@ -14,10 +16,12 @@ const Form = () => {
 
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
+  const [maxRM, setMaxRM] = useState(0);
 
   const handleSumbit = () => {
-    let result = parseInt(weight) * (1 + 0.025 * parseInt(reps));
-    console.log("Weigth: ", result);
+    let maxRM = parseInt(weight) * (1 + 0.025 * parseInt(reps));
+    setMaxRM(maxRM);
+    console.log("1RM: ", maxRM);
     handleClear();
   };
 
@@ -69,12 +73,21 @@ const Form = () => {
           </Text>
         </TouchableOpacity>
       </View>
+      {maxRM > 0 ? (
+        <>
+          <Separator />
+          <Table maxRM={maxRM} />
+        </>
+      ) : (
+        <Text></Text>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: "#fff",
     width: "100%",
     paddingHorizontal: 30,
